@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(310, 380)
+        MainWindow.resize(310, 387)
         MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
         self.shapeLabel.setGeometry(QtCore.QRect(90, 10, 130, 20))
         self.shapeLabel.setObjectName("shapeLabel")
         self.baseLabel = QtWidgets.QLabel(self.centralwidget)
-        self.baseLabel.setGeometry(QtCore.QRect(80, 82, 150, 20))
+        self.baseLabel.setGeometry(QtCore.QRect(50, 82, 210, 20))
         self.baseLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.baseLabel.setObjectName("baseLabel")
         self.shapeSelect = QtWidgets.QComboBox(self.centralwidget)
@@ -30,6 +30,7 @@ class Ui_MainWindow(object):
         self.shapeSelect.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.shapeSelect.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContentsOnFirstShow)
         self.shapeSelect.setObjectName("shapeSelect")
+        self.shapeSelect.addItem("")
         self.shapeSelect.addItem("")
         self.shapeSelect.addItem("")
         self.shapeSelect.addItem("")
@@ -50,12 +51,6 @@ class Ui_MainWindow(object):
         self.heightInput.setText("")
         self.heightInput.setAlignment(QtCore.Qt.AlignCenter)
         self.heightInput.setObjectName("heightInput")
-        self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser.setGeometry(QtCore.QRect(90, 318, 130, 25))
-        self.textBrowser.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.textBrowser.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.textBrowser.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
-        self.textBrowser.setObjectName("textBrowser")
         self.resultLabel = QtWidgets.QLabel(self.centralwidget)
         self.resultLabel.setGeometry(QtCore.QRect(135, 298, 40, 20))
         self.resultLabel.setAlignment(QtCore.Qt.AlignCenter)
@@ -63,6 +58,10 @@ class Ui_MainWindow(object):
         self.submitButton = QtWidgets.QPushButton(self.centralwidget)
         self.submitButton.setGeometry(QtCore.QRect(120, 239, 70, 30))
         self.submitButton.setObjectName("submitButton")
+        self.resultBox = QtWidgets.QTextEdit(self.centralwidget)
+        self.resultBox.setGeometry(QtCore.QRect(90, 318, 130, 25))
+        self.resultBox.setReadOnly(True)
+        self.resultBox.setObjectName("resultBox")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 310, 21))
@@ -79,19 +78,20 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Areas of Shapes"))
         self.shapeLabel.setText(_translate("MainWindow", "What shape do you have?"))
-        self.baseLabel.setText(_translate("MainWindow", "What is the value of the base?"))
-        self.shapeSelect.setItemText(0, _translate("MainWindow", "Circle"))
-        self.shapeSelect.setItemText(1, _translate("MainWindow", "Square"))
-        self.shapeSelect.setItemText(2, _translate("MainWindow", "Rectangle"))
-        self.shapeSelect.setItemText(3, _translate("MainWindow", "Triangle"))
+        self.baseLabel.setText(_translate("MainWindow", "What is the value of the base (or radius)?"))
+        self.shapeSelect.setItemText(0, _translate("MainWindow", "Select"))
+        self.shapeSelect.setItemText(1, _translate("MainWindow", "Circle"))
+        self.shapeSelect.setItemText(2, _translate("MainWindow", "Square"))
+        self.shapeSelect.setItemText(3, _translate("MainWindow", "Rectangle"))
+        self.shapeSelect.setItemText(4, _translate("MainWindow", "Triangle"))
         self.heightLabel.setText(_translate("MainWindow", "What is the value of the height? (if needed)"))
-        self.textBrowser.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.resultLabel.setText(_translate("MainWindow", "Result:"))
+        self.submitButton.setText(_translate("MainWindow", "Submit"))
+        self.resultBox.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Result Displays Here</p></body></html>"))
-        self.resultLabel.setText(_translate("MainWindow", "Result:"))
-        self.submitButton.setText(_translate("MainWindow", "Submit"))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Result Displays Here</p></body></html>"))
 
 
 if __name__ == "__main__":
