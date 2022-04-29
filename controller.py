@@ -10,6 +10,38 @@ class Controller(QMainWindow, Ui_MainWindow):
 
         self.submitButton.clicked.connect(lambda: self.submit())
 
+    def check_base(self, base: str) -> bool:
+        """
+        This method checks if the value passed into it through parameter base is
+        valid and outputs text giving a hint on why the value was not valid
+        :param base: string value that is checked for validity
+        :return: boolean value that allows the submit button functionality to work properly
+        """
+        if base.isdigit() and base != '0':
+            return True
+        elif base == '':
+            self.resultBox.setPlainText('Enter a Value')
+            return False
+        else:
+            self.resultBox.setPlainText('Use Valid Number!')
+            return False
+
+    def check_height(self, height: str) -> bool:
+        """
+        This method checks if the value passed into it through parameter height is
+        valid and outputs text giving a hint on why the value was not valid
+        :param height: string value that is checked for validity
+        :return: boolean value that allows the submit button functionality to work properly
+        """
+        if height.isdigit() and height != '0':
+            return True
+        elif height == '':
+            self.resultBox.setPlainText('Enter a Value')
+            return False
+        else:
+            self.resultBox.setPlainText('Use Valid Number!')
+            return False
+
     def reset_fields(self) -> None:
         """
         This method resets all the input fields to initial states
@@ -25,36 +57,32 @@ class Controller(QMainWindow, Ui_MainWindow):
         """
         shape = self.shapeSelect.currentText()
         base = self.baseInput.text()
-        height = self.baseInput.text()
-
-        # wrong value type/empty value handling
-        if base.isdigit():
-            base = float(base)
-        elif base == '':
-            base = 1
-        else:
-            self.resultBox.setText('Use Number!')
-
-        if height.isdigit():
-            height = float(height)
-        elif height == '':
-            height = 1
-        else:
-            self.resultBox.setText('Use Number!')
+        height = self.heightInput.text()
 
         if shape == 'Select':
             self.resultBox.setText('Select your shape!')
-        if shape == 'Square' or shape == 'Circle':
-            if shape == 'Square':
-                self.resultBox.setPlainText(f'{square(base):.2f}')
-                self.reset_fields()
-            else:
-                self.resultBox.setPlainText(f'{circle(base):.2f}')
-                self.reset_fields()
-        if shape == 'Rectangle' or shape == 'Triangle':
-            if shape == 'Rectangle':
-                self.resultBox.setPlainText(f'{rectangle(base, height):.2f}')
-                self.reset_fields()
-            else:
-                self.resultBox.setPlainText(f'{triangle(base, height):.2f}')
-                self.reset_fields()
+
+        elif shape == 'Square' and self.check_base(base):
+            base = float(base)
+            self.resultBox.setPlainText(f'{square(base):.2f}')
+            self.reset_fields()
+
+        elif shape == 'Circle' and self.check_base(base):
+            base = float(base)
+            self.resultBox.setPlainText(f'{circle(base):.2f}')
+            self.reset_fields()
+
+        elif shape == 'Rectangle' and (self.check_base(base) and self.check_height(height)):
+            base = float(base)
+            height = float(height)
+            self.resultBox.setPlainText(f'{rectangle(base, height):.2f}')
+            self.reset_fields()
+
+        elif shape == 'Triangle' and (self.check_base(base) and self.check_height(height)):
+            base = float(base)
+            height = float(height)
+            self.resultBox.setPlainText(f'{triangle(base, height):.2f}')
+            self.reset_fields()
+
+        else:
+            pass
