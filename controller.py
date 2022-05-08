@@ -8,7 +8,19 @@ class Controller(QMainWindow, Ui_MainWindow):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
 
+        self.hide_fields()
+
         self.submitButton.clicked.connect(lambda: self.submit())
+        self.shapeSelect.currentTextChanged.connect(lambda: self.changed())
+
+    def hide_fields(self) -> None:
+        """
+        This method hides all the input fields and corresponding labels for initialization
+        """
+        self.baseLabel.hide()
+        self.baseInput.hide()
+        self.heightInput.hide()
+        self.heightLabel.hide()
 
     def check_base(self, base: str) -> bool:
         """
@@ -86,3 +98,19 @@ class Controller(QMainWindow, Ui_MainWindow):
 
         else:
             pass
+
+    def changed(self):
+        if self.shapeSelect.currentText() == 'Circle' or self.shapeSelect.currentText() == 'Square':
+            self.baseLabel.show()
+            self.baseInput.show()
+            self.heightLabel.hide()
+            self.heightInput.hide()
+
+        elif self.shapeSelect.currentText() == 'Rectangle' or self.shapeSelect.currentText() == 'Triangle':
+            self.baseLabel.show()
+            self.baseInput.show()
+            self.heightLabel.show()
+            self.heightInput.show()
+
+        else:
+            self.hide_fields()

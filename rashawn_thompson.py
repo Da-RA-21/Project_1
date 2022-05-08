@@ -1,6 +1,4 @@
 import math
-# TODO: Make sure the GUI turns all values into floats so your type hinting is correct
-# TODO: Make sure in working with values that use pi that you limit significant figures displayed in the answer
 
 
 def circle(radius: float) -> float:
